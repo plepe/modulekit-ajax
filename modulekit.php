@@ -9,8 +9,10 @@ $depend=array();
 
 // these files will be included in this order:
 $include_php=array(
+  "inc/ajax.php",
 );
 $include_js=array(
+  "inc/ajax.js",
 );
 $include_css=array(
 );
