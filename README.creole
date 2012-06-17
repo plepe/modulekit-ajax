@@ -1,0 +1,13 @@
+Example ajax.php, to be placed alongside index.php:
+{{{
+<?php include "modulekit/loader.php"; /* loads all php-includes */
+
+// resume session, ...
+// ...
+
+// handle ajax-request
+<?php _ajax_process(); ?>
+}}}
+
+== REQUIRES ==
+- [http://phpjs.org/ PHPJS]
