@@ -141,8 +141,6 @@ function ajax(funcname, param, postdata, callback) {
 
     if(postdata!="") {
       this.request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      this.request.setRequestHeader("Content-length", postdata.length);
-      this.request.setRequestHeader("Connection", "close");
     }
 
     this.request.send(postdata);
