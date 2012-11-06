@@ -1,5 +1,10 @@
 <?php
+global $ajax_timestamp;
+
 function _ajax_process() {
+  global $ajax_timestamp;
+  $ajax_timestamp=new DateTime();
+
   $postdata = file_get_contents("php://input");
 
   $fun="ajax_{$_REQUEST['__func']}";
