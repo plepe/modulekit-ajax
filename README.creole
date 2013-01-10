@@ -12,6 +12,3 @@ Example ajax.php, to be placed alongside index.php:
 == FUNCTIONS, etc. ==
 * global $ajax_timestamp
 Set to beginning of ajax transmission
-
-== REQUIRES ==
-- [http://phpjs.org/ PHPJS]

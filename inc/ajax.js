@@ -57,7 +57,7 @@ function ajax(funcname, param, postdata, callback) {
 	  cur=cur.nextSibling;
 	}
 
-	var ret=json_decode(str);
+	var ret=JSON.parse(str);
 	if(ret) {
 	  this.request.responseJSON=ret;
 	  this.result=ret;
@@ -70,8 +70,8 @@ function ajax(funcname, param, postdata, callback) {
 	this.type="dom";
       }
     }
-    
-    var ret=json_decode(this.request.responseText);
+
+    var ret=JSON.parse(this.request.responseText);
     if(ret) {
       this.type="json";
       this.request.responseJSON=ret;
@@ -158,10 +158,10 @@ function ajax_build_request(param) {
     switch(typeof param[k]) {
       case "string":
       case "number":
-        ret.push(urlencode(k)+"="+param[k])
+        ret.push(encodeURIComponent(k)+"="+param[k])
         break;
       default:
-        ret.push(urlencode(k)+"="+urlencode(json_encode(param[k])));
+        ret.push(encodeURIComponent(k)+"="+encodeURIComponent(JSON.stringify(param[k])));
     }
   }
 
