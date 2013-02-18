@@ -41,7 +41,12 @@ function ajax(funcname, param, postdata, callback) {
   var sync;
 
   function get_return() {
-    if(this.request.responseXML) {
+    this.content_type=this.request.getResponseHeader("content-type");
+    var m;
+    if(m=this.content_type.match(/^([^;]*);/))
+      this.content_type=m[1];
+
+    if(this.content_type=="text/xml") {
       this.type="dom";
       this.responseXML=this.request.responseXML;
       this.result=ret;
@@ -70,14 +75,13 @@ function ajax(funcname, param, postdata, callback) {
 	this.type="dom";
       }
     }
-
-    var ret=JSON.parse(this.request.responseText);
-    if(ret) {
+    else if(this.content_type=="application/json") {
+      var ret=JSON.parse(this.request.responseText);
       this.type="json";
       this.request.responseJSON=ret;
       this.result=ret;
     }
-    else if(!this.result) {
+    else {
       this.type="plain";
       this.result=this.request.responseText
         .substr(0, this.request.responseText.length-1);
