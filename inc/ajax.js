@@ -83,8 +83,7 @@ function ajax(funcname, param, postdata, callback) {
     }
     else {
       this.type="plain";
-      this.result=this.request.responseText
-        .substr(0, this.request.responseText.length-1);
+      this.result=this.request.responseText;
     }
 
     this.responseXML =this.request.responseXML ;
