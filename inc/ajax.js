@@ -158,6 +158,11 @@ function ajax_build_request(param) {
   var ret=[];
 
   for(var k in param) {
+    if(param[k] === null) {
+      ret.push(encodeURIComponent(k)+"=");
+      continue;
+    }
+
     switch(typeof param[k]) {
       case "string":
       case "number":
