@@ -20,8 +20,9 @@
 
 // ajax - calls a php_function with params
 // parameter:
-// funcname       the name of the php-function. the php-function has to 
-//                be called "ajax_"+funcname
+// funcname       * the name of the php-function. the php-function has to 
+//                  be called "ajax_"+funcname
+//                * an URL (e.g. data.php)
 // param          an associative array of parameters
 // postdata       (optional) data which should be posted to the server. it will
 //                be passed to the ajax_[funcname] function as third parameter.
@@ -138,8 +139,14 @@ function ajax(funcname, param, postdata, callback) {
 
     this.request.onreadystatechange = req_change.bind(this);
     sync=callback!=null;
+
+    if(funcname.match(/\./))
+      var url = funcname + "?" + p;
+    else
+      var url = "ajax.php?__func="+funcname+"&"+p;
+
     this.request.open((postdata==""?"GET":"POST"),
-             "ajax.php?__func="+funcname+"&"+p, sync);
+             url, sync);
     last_params=p;
 
     if(postdata!="") {
