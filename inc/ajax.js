@@ -36,6 +36,10 @@
 //  .responseXML  the response as DOMDocument (if valid XML)
 //  .responseJSON the return value of the function
 function ajax(funcname, param, postdata, callback) {
+  // make sure, that we are inside an instance of ajax
+  if(this == window)
+    return new ajax(funcname, param, postdata, callback);
+
   // public
   this.request=false;
   // private
