@@ -169,18 +169,19 @@ function ajax_build_request(param) {
   var ret=[];
 
   for(var k in param) {
+    var k_encoded = encodeURIComponent(k);
     if(param[k] === null) {
-      ret.push(encodeURIComponent(k)+"=");
+      ret.push(k_encoded + "=");
       continue;
     }
 
     switch(typeof param[k]) {
       case "string":
       case "number":
-        ret.push(encodeURIComponent(k)+"="+encodeURIComponent(param[k]))
+        ret.push(k_encoded + "=" + encodeURIComponent(param[k]))
         break;
       default:
-        ret.push(encodeURIComponent(k)+"="+encodeURIComponent(JSON.stringify(param[k])));
+        ret.push(k_encoded + "=" + encodeURIComponent(JSON.stringify(param[k])));
     }
   }
 
