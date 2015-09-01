@@ -165,11 +165,15 @@ function ajax(funcname, param, postdata, callback) {
   }
 }
 
-function ajax_build_request(param) {
+function ajax_build_request(param, prefix) {
   var ret=[];
 
   for(var k in param) {
-    var k_encoded = encodeURIComponent(k);
+    if(prefix)
+      var k_encoded = prefix + "[" + encodeURIComponent(k) + "]";
+    else
+      var k_encoded = encodeURIComponent(k);
+
     if(param[k] === null) {
       ret.push(k_encoded + "=");
       continue;
@@ -181,7 +185,19 @@ function ajax_build_request(param) {
         ret.push(k_encoded + "=" + encodeURIComponent(param[k]))
         break;
       default:
-        ret.push(k_encoded + "=" + encodeURIComponent(JSON.stringify(param[k])));
+        if(param[k].length) {
+          for(var i = 0; i < param[k].length; i++) {
+            if((typeof param[k][i] == "string") || (typeof param[k][i] == "number"))
+              ret.push(k_encoded + "[" + i + "]=" + encodeURIComponent(param[k][i]));
+            else
+              ret = ret.concat(ajax_build_request(param[k][i], k_encoded + "[" + i + "]"));
+          }
+        }
+        else {
+          for(var i in param[k]) {
+            ret = ret.concat(ajax_build_request(param[k], k_encoded));
+          }
+        }
     }
   }
 
