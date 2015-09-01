@@ -177,7 +177,7 @@ function ajax_build_request(param) {
     switch(typeof param[k]) {
       case "string":
       case "number":
-        ret.push(encodeURIComponent(k)+"="+param[k])
+        ret.push(encodeURIComponent(k)+"="+encodeURIComponent(param[k]))
         break;
       default:
         ret.push(encodeURIComponent(k)+"="+encodeURIComponent(JSON.stringify(param[k])));
