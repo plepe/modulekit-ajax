@@ -180,6 +180,9 @@ function ajax_build_request(param, prefix) {
     }
 
     switch(typeof param[k]) {
+      case "undefined":
+        ret.push(k_encoded + "=");
+        break;
       case "string":
       case "number":
         ret.push(k_encoded + "=" + encodeURIComponent(param[k]))
