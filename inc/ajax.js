@@ -185,6 +185,7 @@ function ajax_build_request(param, prefix) {
         break;
       case "string":
       case "number":
+      case "boolean":
         ret.push(k_encoded + "=" + encodeURIComponent(param[k]))
         break;
       default:
