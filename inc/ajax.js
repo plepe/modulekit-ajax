@@ -188,7 +188,7 @@ function ajax_build_request(param, prefix) {
       case "boolean":
         ret.push(k_encoded + "=" + encodeURIComponent(param[k]))
         break;
-      default:
+      case "object":
         if(param[k].length) {
           for(var i = 0; i < param[k].length; i++) {
             if((typeof param[k][i] == "string") || (typeof param[k][i] == "number"))
@@ -202,6 +202,9 @@ function ajax_build_request(param, prefix) {
             ret = ret.concat(ajax_build_request(param[k], k_encoded));
           }
         }
+        break;
+      default:
+        console.log("Don't know how to handle parameters of data type '" + typeof param[k] + "'");
     }
   }
 
