@@ -138,6 +138,9 @@ function ajax(funcname, param, postdata, callback) {
       callback=postdata;
       postdata="";
     }
+    else if(typeof postdata === "object") {
+      postdata = JSON.stringify(postdata)
+    }
     else if(!postdata)
       postdata="";
 
