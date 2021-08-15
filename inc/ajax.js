@@ -214,3 +214,6 @@ function ajax_build_request(param, prefix) {
   return ret.join("&");
 }
 
+if (module) {
+  module.exports = ajax
+}
